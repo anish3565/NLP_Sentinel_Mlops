@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
+*.exe
 # C extensions
 *.so
 
@@ -88,3 +88,6 @@ target/
 # Mypy cache
 .mypy_cache/
 cred.txt 
+
+# Virutal environment
+venv/
