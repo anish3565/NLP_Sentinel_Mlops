@@ -1,4 +1,4 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = ../local_s3
+    url = s3://nlp-mlops-proj-s3
