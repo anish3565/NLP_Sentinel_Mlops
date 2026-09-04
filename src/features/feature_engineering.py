@@ -4,6 +4,8 @@ import pandas as pd
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 import yaml
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from src.logger import logging
 import pickle
 
