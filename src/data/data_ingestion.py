@@ -8,7 +8,7 @@ import yaml
 import logging
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from src import logger
-from src.connections import s3_connection
+from src.connections import s3_connections
 from dotenv import load_dotenv
 
 load_dotenv()
