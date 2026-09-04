@@ -36,7 +36,7 @@ class s3_operations:
             return df
         except Exception as e:
             logging.exception(f"❌ Failed to fetch '{file_key}' from S3: {e}")
-            return None
+            return None 
 
 # Example usage
 # if __name__ == "__main__":
