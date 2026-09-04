@@ -92,4 +92,6 @@ cred.txt
 # Virutal environment
 venv/
 
-local_s3
+local_s3/
+
+data/
