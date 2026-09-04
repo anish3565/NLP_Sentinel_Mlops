@@ -93,3 +93,5 @@ cred.txt
 venv/
 
 local_s3/
+
+models/
