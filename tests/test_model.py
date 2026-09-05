@@ -31,7 +31,6 @@ class TestModelLoading(unittest.TestCase):
             dagshub.init(
                 repo_owner=repo_owner,
                 repo_name=repo_name,
-                token=dagshub_token,
                 mlflow=True
             )
             mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
