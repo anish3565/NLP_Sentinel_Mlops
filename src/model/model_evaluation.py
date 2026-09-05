@@ -42,19 +42,7 @@ if dagshub_token:
     logging.info("Initialized DagsHub remote MLflow tracking.")
 else:
     logging.warning("No DagsHub token found. Running with default/local MLflow tracking.")
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
-# Initialize non-interactively with token
-dagshub.init(
-    repo_owner=repo_owner,
-    repo_name=repo_name,
-    token=dagshub_token,
-    mlflow=True
-)
-
-# Set up MLflow tracking URI
-mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 # -------------------------------------------------------------------------------------
 
 # # For local
