@@ -1,17 +1,18 @@
-import numpy as np
-import pandas as pd
-import pickle
 import json
-from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
 import logging
+import os
+import pickle
+import sys
+import dagshub
+from dotenv import load_dotenv
 import mlflow
 import mlflow.sklearn
-import dagshub
-import os
-import sys
+import numpy as np
+import pandas as pd
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from src.logger import logging
-from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -19,15 +20,24 @@ load_dotenv()
 # -------------------------------------------------------------------------------------
 # # Set up DagsHub credentials for MLflow tracking
 dagshub_token = os.getenv("CAPSTONE_TEST")
+dagshub_url = "https://dagshub.com"
+repo_owner = "tripathianish12"
+repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
+dagshub_token = os.getenv("CAPSTONE_TEST")
+
 if not dagshub_token:
     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
 
 os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
 os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
-dagshub_url = "https://dagshub.com"
-repo_owner = "tripathianish12"
-repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
+# Initialize non-interactively with token
+dagshub.init(
+    repo_owner=repo_owner,
+    repo_name=repo_name,
+    token=dagshub_token,
+    mlflow=True
+)
 
 # Set up MLflow tracking URI
 mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
