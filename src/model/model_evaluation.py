@@ -18,35 +18,35 @@ load_dotenv()
 
 # # Production use
 # -------------------------------------------------------------------------------------
-# # Set up DagsHub credentials for MLflow tracking
-dagshub_token = os.getenv("CAPSTONE_TEST")
-dagshub_url = "https://dagshub.com"
-repo_owner = "tripathianish12"
-repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
-dagshub_token = os.getenv("CAPSTONE_TEST")
+# # # Set up DagsHub credentials for MLflow tracking
+# dagshub_token = os.getenv("CAPSTONE_TEST")
+# dagshub_url = "https://dagshub.com"
+# repo_owner = "tripathianish12"
+# repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
+# dagshub_token = os.getenv("CAPSTONE_TEST")
 
-if not dagshub_token:
-    raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
+# if not dagshub_token:
+#     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+# os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+# os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
-# Initialize non-interactively with token
-dagshub.init(
-    repo_owner=repo_owner,
-    repo_name=repo_name,
-    token=dagshub_token,
-    mlflow=True
-)
+# # Initialize non-interactively with token
+# dagshub.init(
+#     repo_owner=repo_owner,
+#     repo_name=repo_name,
+#     token=dagshub_token,
+#     mlflow=True
+# )
 
-# Set up MLflow tracking URI
-mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
+# # Set up MLflow tracking URI
+# mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 # -------------------------------------------------------------------------------------
 
 # # For local
 # -------------------------------------------------------------------------------------
-# mlflow.set_tracking_uri('https://dagshub.com/tripathianish12/NLP_Sentiment_Analysis_IMDB_reviews.mlflow')
-# dagshub.init(repo_owner='tripathianish12', repo_name='NLP_Sentiment_Analysis_IMDB_reviews', mlflow=True)
+mlflow.set_tracking_uri('https://dagshub.com/tripathianish12/NLP_Sentiment_Analysis_IMDB_reviews.mlflow')
+dagshub.init(repo_owner='tripathianish12', repo_name='NLP_Sentiment_Analysis_IMDB_reviews', mlflow=True)
 # -------------------------------------------------------------------------------------
 
 
