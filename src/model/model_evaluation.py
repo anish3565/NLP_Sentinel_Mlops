@@ -38,7 +38,7 @@ if dagshub_token:
         token=dagshub_token,
         mlflow=True
     )
-    mlflow.set_tracking_uri(f"https://dagshub.com/{repo_owner}/{repo_name}.mlflow")
+    mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
     logging.info("Initialized DagsHub remote MLflow tracking.")
 else:
     logging.warning("No DagsHub token found. Running with default/local MLflow tracking.")
