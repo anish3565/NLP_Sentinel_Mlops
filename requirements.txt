@@ -1,18 +1,25 @@
-# local package
+# Local package editable install
 -e .
 
-# external requirements
+# Development & Documentation
 cookiecutter
 click
 Sphinx
 coverage
-awscli
 flake8
 python-dotenv
+
+# Data & NLP
+nltk
+numpy
+pandas
+scikit-learn
+xgboost
+
+# MLOps, Tracking & Versioning
 dagshub
 mlflow
-xgboost
-nltk
+skops
 dvc
-dvc[s3]
-awscli
+dvc-s3
+boto3
