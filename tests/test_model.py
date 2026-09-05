@@ -18,21 +18,21 @@ class TestModelLoading(unittest.TestCase):
     # # Production use
         # -------------------------------------------------------------------------------------
         dagshub_url = "https://dagshub.com"
-        repo_owner = os.getenv("DAGSHUB_REPO_OWNER", "tripathianish12")
-        repo_name = os.getenv(
-            "DAGSHUB_REPO_NAME", "NLP_Sentiment_Analysis_IMDB_reviews"
-        )
+        repo_owner = "tripathianish12"
+        repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
         dagshub_token = (
             os.getenv("CAPSTONE_TEST")
             or os.getenv("DAGSHUB_USER_TOKEN")
             or os.getenv("DAGSHUB_TOKEN")
         )
-
         if dagshub_token:
-            os.environ["DAGSHUB_USER_TOKEN"] = dagshub_token
             os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
             os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-            dagshub.init(repo_owner=repo_owner, repo_name=repo_name, mlflow=True)
+            dagshub.init(
+                repo_owner=repo_owner,
+                repo_name=repo_name,
+                mlflow=True
+            )
             mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
             logging.info("Initialized DagsHub remote MLflow tracking.")
         else:
