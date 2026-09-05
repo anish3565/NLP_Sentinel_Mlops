@@ -23,3 +23,7 @@ skops
 dvc
 dvc-s3
 boto3
+
+# Web Application & Monitoring
+Flask
+prometheus_client
