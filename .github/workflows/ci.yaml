@@ -27,23 +27,21 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: run pipeline
-        run: |
-          dvc repro
-      
       - name: Run DVC Pipeline
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+          DAGSHUB_USER_TOKEN: ${{ secrets.CAPSTONE_TEST }}
           DAGSHUB_REPO_OWNER: ${{ secrets.DAGSHUB_REPO_OWNER }}
           DAGSHUB_REPO_NAME: ${{ secrets.DAGSHUB_REPO_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           dvc repro
-      
+
       - name: Run model tests
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+          DAGSHUB_USER_TOKEN: ${{ secrets.CAPSTONE_TEST }}
         run: |
           python -m unittest tests/test_model.py
 
@@ -51,10 +49,14 @@ jobs:
         if: success()
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
-        run: python scripts/promote_model.py
+          DAGSHUB_USER_TOKEN: ${{ secrets.CAPSTONE_TEST }}
+        run: |
+          python scripts/promote_model.py
 
       - name: Run Flask app tests
         if: success()
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
-        run: python -m unittest tests/test_flask_app.py 
+          DAGSHUB_USER_TOKEN: ${{ secrets.CAPSTONE_TEST }}
+        run: |
+          python -m unittest tests/test_flask_app.py
