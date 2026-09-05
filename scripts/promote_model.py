@@ -33,27 +33,48 @@ def promote_model():
     # -------------------------------------------------------------------------------------
 
     client = mlflow.MlflowClient()
-
     model_name = "my_model"
-    # Get the latest version in staging
-    latest_version_staging = client.get_latest_versions(model_name, stages=["Staging"])[0].version
 
-    # Archive the current production model
+    # 1. Look for candidate versions in 'Staging', then fallback to 'None'
+    candidate_versions = client.get_latest_versions(
+        model_name, stages=["Staging"]
+    )
+    if not candidate_versions:
+        candidate_versions = client.get_latest_versions(model_name, stages=["None"])
+
+    if not candidate_versions:
+        # 2. Fallback: query all registered model versions and pick the latest
+        all_versions = client.search_model_versions(f"name='{model_name}'")
+        if not all_versions:
+            raise ValueError(f"No versions found for registered model '{model_name}'")
+        latest_version_staging = max(all_versions, key=lambda v: int(v.version)).version
+    else:
+        latest_version_staging = candidate_versions[0].version
+
+    logging.info(
+        "Found candidate model version %s for promotion.", latest_version_staging
+    )
+
+    # 3. Archive current production models
     prod_versions = client.get_latest_versions(model_name, stages=["Production"])
     for version in prod_versions:
-        client.transition_model_version_stage(
-            name=model_name,
-            version=version.version,
-            stage="Archived"
+        if str(version.version) != str(latest_version_staging):
+            client.transition_model_version_stage(
+            name=model_name, version=version.version, stage="Archived"
+        )
+        logging.info(
+            "Archived previous production version %s", version.version
         )
 
-    # Promote the new model to production
+    # 4. Promote candidate version to production
     client.transition_model_version_stage(
         name=model_name,
         version=latest_version_staging,
-        stage="Production"
+        stage="Production",
+        archive_existing_versions=True,
     )
     print(f"Model version {latest_version_staging} promoted to Production")
 
-if __name__ == "__main__":
-    promote_model()
+
+    if __name__ == "__main__":
+        promote_model()
