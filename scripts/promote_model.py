@@ -10,30 +10,30 @@ logging.basicConfig(level=logging.INFO)
 def promote_model():
     # # Production use
     # -------------------------------------------------------------------------------------
-    # dagshub_url = "https://dagshub.com"
-    # repo_owner = "tripathianish12"
-    # repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
-    # dagshub_token = (
-    #     os.getenv("CAPSTONE_TEST")
-    #     or os.getenv("DAGSHUB_USER_TOKEN")
-    #     or os.getenv("DAGSHUB_TOKEN")
-    # )
-    # if dagshub_token:
-    #     os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-    #     os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-    #     dagshub.init(
-    #         repo_owner=repo_owner,
-    #         repo_name=repo_name,
-    #         mlflow=True
-    #     )
-    #     mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
-    #     logging.info("Initialized DagsHub remote MLflow tracking.")
-    # else:
-    #     logging.warning("No DagsHub token found. Running with default/local MLflow tracking.")
+    dagshub_url = "https://dagshub.com"
+    repo_owner = "tripathianish12"
+    repo_name = "NLP_Sentiment_Analysis_IMDB_reviews"
+    dagshub_token = (
+        os.getenv("CAPSTONE_TEST")
+        or os.getenv("DAGSHUB_USER_TOKEN")
+        or os.getenv("DAGSHUB_TOKEN")
+    )
+    if dagshub_token:
+        os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+        dagshub.init(
+            repo_owner=repo_owner,
+            repo_name=repo_name,
+            mlflow=True
+        )
+        mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
+        logging.info("Initialized DagsHub remote MLflow tracking.")
+    else:
+        logging.warning("No DagsHub token found. Running with default/local MLflow tracking.")
     # # -------------------------------------------------------------------------------------
 
-    mlflow.set_tracking_uri('https://dagshub.com/tripathianish12/NLP_Sentiment_Analysis_IMDB_reviews.mlflow')
-    dagshub.init(repo_owner='tripathianish12', repo_name='NLP_Sentiment_Analysis_IMDB_reviews', mlflow=True)
+    # mlflow.set_tracking_uri('https://dagshub.com/tripathianish12/NLP_Sentiment_Analysis_IMDB_reviews.mlflow')
+    # dagshub.init(repo_owner='tripathianish12', repo_name='NLP_Sentiment_Analysis_IMDB_reviews', mlflow=True)
 
     client = mlflow.MlflowClient()
     model_name = "my_model"
