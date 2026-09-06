@@ -5,7 +5,7 @@ metadata:
   labels:
     app: flask-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: flask-app
@@ -24,10 +24,10 @@ spec:
         - containerPort: 5000
         resources:
           requests:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "250m"
           limits:
-            memory: "512Mi"
+            memory: "1024Mi"
             cpu: "1"
         env:
         - name: CAPSTONE_TEST
