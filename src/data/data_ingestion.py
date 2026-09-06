@@ -77,13 +77,13 @@ def main():
         test_size = params['data_ingestion']['test_size']
         # test_size = 0.2
         
-        # df = load_data(data_url='https://raw.githubusercontent.com/anish3565/Dataset/refs/heads/main/data.csv')
-        s3 = s3_connection.s3_operations(
-            bucket_name=os.getenv("AWS_BUCKET_NAME"),
-            aws_access_key=os.getenv("AWS_ACCESS_KEY_ID"),
-            aws_secret_key=os.getenv("AWS_SECRET_ACCESS_KEY")
-        )
-        df = s3.fetch_file_from_s3("data.csv") 
+        df = load_data(data_url='https://raw.githubusercontent.com/anish3565/Dataset/refs/heads/main/data.csv')
+        # s3 = s3_connection.s3_operations(
+        #     bucket_name=os.getenv("AWS_BUCKET_NAME"),
+        #     aws_access_key=os.getenv("AWS_ACCESS_KEY_ID"),
+        #     aws_secret_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+        # )
+        # df = s3.fetch_file_from_s3("data.csv") 
 
         final_df = preprocess_data(df)
         train_data, test_data = train_test_split(final_df, test_size=test_size, random_state=42)
