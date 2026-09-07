@@ -113,10 +113,4 @@ Configure these secrets in **GitHub Repository > Settings > Secrets and variable
 
 ---
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for details.
-
-```
-
 ```
