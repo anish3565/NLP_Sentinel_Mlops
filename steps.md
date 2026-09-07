@@ -1,9 +1,10 @@
 # Steps for the Project
 Complete walkthrough of setup, configuration, deployment, and monitoring commands for the **NLP Sentinel MLOps** platform.
 
+---
+
 # Execution Guide & Step-by-Step Commands
 
----
 
 ## 1. Project Initialization & Structure
 
