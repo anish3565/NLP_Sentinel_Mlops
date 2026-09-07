@@ -110,7 +110,3 @@ Configure these secrets in **GitHub Repository > Settings > Secrets and variable
 | `AWS_ACCOUNT_ID` | 12-digit AWS Account ID |
 | `ECR_REPOSITORY` | AWS ECR Repository Name |
 | `CAPSTONE_TEST` | DagsHub MLflow Auth Token |
-
----
-
-```
