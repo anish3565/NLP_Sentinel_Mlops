@@ -10,7 +10,7 @@ Complete walkthrough of setup, configuration, deployment, and monitoring command
 
 ```markdown
 
-```bash
+```
 # 1. Clone the repository and navigate to root
 git clone [https://github.com/anish3565/NLP_Sentinel_Mlops.git](https://github.com/anish3565/NLP_Sentinel_Mlops.git)
 cd NLP_Sentinel_Mlops
