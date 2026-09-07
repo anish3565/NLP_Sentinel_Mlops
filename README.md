@@ -11,6 +11,12 @@ Production-grade, end-to-end MLOps platform for automated NLP sentiment inferenc
 
 ---
 
+## Execution & Deployment Guide
+
+For detailed, step-by-step commands covering local setup, DVC pipelines, AWS EKS deployment, and monitoring configuration, see the [Full Step-by-Step Guide](steps.md) (or view on [GitHub](https://github.com/anish3565/NLP_Sentinel_Mlops/blob/main/steps.md)).
+
+---
+
 ## System Architecture
 
 ```text
