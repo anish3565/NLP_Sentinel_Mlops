@@ -1,12 +1,12 @@
 # Steps for the Project
-
-```markdown
-# Execution Guide & Step-by-Step Commands
 Complete walkthrough of setup, configuration, deployment, and monitoring commands for the **NLP Sentinel MLOps** platform.
 
 ## 1. Project Initialization & Structure
----
 
+```markdown
+# Execution Guide & Step-by-Step Commands
+
+---
 
 ```bash
 # 1. Clone the repository and navigate to root
