@@ -197,8 +197,8 @@ ssh -i your-key.pem ubuntu@<GRAFANA_EC2_PUBLIC_IP>
 
 # 2. Install and start Grafana
 sudo apt update && sudo apt upgrade -y
-wget [https://dl.grafana.com/oss/release/grafana_10.1.5_amd64.deb](https://dl.grafana.com/oss/release/grafana_10.1.5_amd64.deb)
-sudo apt install ./grafana_10.1.5_amd64.deb -y
+wget [https://dl.grafana.com/oss/release/grafana_13.2.1_amd64.deb](https://dl.grafana.com/oss/release/grafana_13.2.1_amd64.deb)
+sudo apt install ./grafana_13.2.1_amd64.deb -y
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
