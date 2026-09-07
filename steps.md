@@ -1,16 +1,15 @@
 # Steps for the Project
 Complete walkthrough of setup, configuration, deployment, and monitoring commands for the **NLP Sentinel MLOps** platform.
 
----
-
 # Execution Guide & Step-by-Step Commands
 
+---
 
 ## 1. Project Initialization & Structure
 
 ```markdown
 
-```
+```bash
 # 1. Clone the repository and navigate to root
 git clone [https://github.com/anish3565/NLP_Sentinel_Mlops.git](https://github.com/anish3565/NLP_Sentinel_Mlops.git)
 cd NLP_Sentinel_Mlops
