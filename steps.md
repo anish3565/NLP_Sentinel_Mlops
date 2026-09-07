@@ -1,4 +1,4 @@
-**TL;DR:** Copy the clean, pre-formatted Markdown block below directly into your repository as `STEPS.md` (or `COMMANDS.md`) for complete, copy-pasteable step-by-step execution.
+# Steps for the Project
 
 ```markdown
 # Execution Guide & Step-by-Step Commands
