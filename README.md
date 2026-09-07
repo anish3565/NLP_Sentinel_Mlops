@@ -1,5 +1,6 @@
-```markdown
 # NLP Sentinel MLOps: Cloud-Native Sentiment Analysis Platform
+
+Production-grade, end-to-end MLOps platform for automated NLP sentiment inference. This project covers data version control (**DVC + AWS S3**), experiment tracking and remote model registry (**MLflow + DagsHub**), containerization (**Docker + AWS ECR**), continuous integration and automated deployment (**GitHub Actions**), managed Kubernetes orchestration (**AWS EKS**), and real-time observability (**Prometheus + Grafana**).
 
 [![CI/CD Pipeline](https://github.com/anish3565/NLP_Sentinel_Mlops/actions/workflows/ci.yaml/badge.svg)](https://github.com/anish3565/NLP_Sentinel_Mlops/actions)
 [![DVC](https://img.shields.io/badge/Data_Version_Control-DVC_with_S3-945DD6?logo=dvc&logoColor=white)](https://dvc.org/)
@@ -7,8 +8,6 @@
 [![Docker](https://img.shields.io/badge/Container-Docker_%26_AWS_ECR-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![AWS EKS](https://img.shields.io/badge/Orchestration-AWS_EKS_Cluster-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/eks/)
 [![Observability](https://img.shields.io/badge/Monitoring-Prometheus_%26_Grafana-F46800?logo=prometheus&logoColor=white)](https://prometheus.io/)
-
-Production-grade, end-to-end MLOps platform for automated NLP sentiment inference. This project covers data version control (**DVC + AWS S3**)[cite: 1], experiment tracking and remote model registry (**MLflow + DagsHub**)[cite: 1], containerization (**Docker + AWS ECR**)[cite: 1], continuous integration and automated deployment (**GitHub Actions**)[cite: 1], managed Kubernetes orchestration (**AWS EKS**)[cite: 1], and real-time observability (**Prometheus + Grafana**)[cite: 1].
 
 ---
 
@@ -46,23 +45,11 @@ Production-grade, end-to-end MLOps platform for automated NLP sentiment inferenc
 ## Tech Stack
 
 * **Data Engineering & Tracking:** Python, Cookiecutter Data Science, DVC (Data Version Control), AWS S3, MLflow, DagsHub
-
-
 * **Model Inference & Serving:** Flask, NLTK / Scikit-Learn, Prometheus Client Exporter
-
-
 * **Containerization:** Docker Desktop, Amazon Elastic Container Registry (ECR)
-
-
 * **Orchestration & Infrastructure:** Amazon Elastic Kubernetes Service (EKS), `kubectl`, `eksctl`, AWS CloudFormation
-
-
 * **CI/CD:** GitHub Actions
-
-
 * **Monitoring & Alerting:** Prometheus, Grafana on AWS EC2
-
-
 
 ---
 
@@ -111,24 +98,12 @@ Configure these secrets in **GitHub Repository > Settings > Secrets and variable
 
 | Secret Name | Description |
 | --- | --- |
-| `AWS_ACCESS_KEY_ID` | IAM User Access Key
-
- |
-| `AWS_SECRET_ACCESS_KEY` | IAM User Secret Access Key
-
- |
-| `AWS_REGION` | AWS Region (e.g. `us-east-1`)
-
- |
-| `AWS_ACCOUNT_ID` | 12-digit AWS Account ID
-
- |
-| `ECR_REPOSITORY` | AWS ECR Repository Name
-
- |
-| `CAPSTONE_TEST` | DagsHub MLflow Auth Token
-
- |
+| `AWS_ACCESS_KEY_ID` | IAM User Access Key |
+| `AWS_SECRET_ACCESS_KEY` | IAM User Secret Access Key |
+| `AWS_REGION` | AWS Region (e.g. `us-east-1`) |
+| `AWS_ACCOUNT_ID` | 12-digit AWS Account ID |
+| `ECR_REPOSITORY` | AWS ECR Repository Name |
+| `CAPSTONE_TEST` | DagsHub MLflow Auth Token |
 
 ---
 
