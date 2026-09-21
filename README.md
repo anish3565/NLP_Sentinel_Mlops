@@ -131,7 +131,7 @@ terraform apply
 
 ## Quick Workflow Reference
 
-* For full command-by-command instructions across local setup, DVC, AWS EKS, Prometheus, Grafana, and teardown, refer to `COMMANDS.md`.
+* For full command-by-command instructions across local setup, DVC, AWS EKS, Prometheus, Grafana, and teardown, refer to [`steps.md`](https://github.com/anish3565/NLP_Sentinel_Mlops/blob/main/steps.md).
 
 ### CI/CD Environment Variables Required
 
