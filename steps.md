@@ -231,4 +231,4 @@ eksctl get cluster --region us-east-1
 > **If you provisioned with Terraform instead**, use `terraform/destroy.sh`
 > in place of steps 2–4 above — it deletes the Kubernetes-managed
 > LoadBalancer first, then runs `terraform destroy` for the full stack.
-> See [`terraform/README.md`](../terraform/README.md).
+> See [`terraform/README.md`](https://github.com/anish3565/NLP_Sentinel_Mlops/blob/main/terraform/README.md).
