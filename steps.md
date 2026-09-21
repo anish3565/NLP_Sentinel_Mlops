@@ -5,11 +5,9 @@ Complete walkthrough of setup, configuration, deployment, and monitoring command
 
 ## 1. Project Initialization & Structure
 
-```markdown
-
 ```bash
 # 1. Clone the repository and navigate to root
-git clone [https://github.com/anish3565/NLP_Sentinel_Mlops.git](https://github.com/anish3565/NLP_Sentinel_Mlops.git)
+git clone https://github.com/anish3565/NLP_Sentinel_Mlops.git
 cd NLP_Sentinel_Mlops
 
 # 2. Create and activate virtual environment
@@ -23,11 +21,10 @@ source venv/bin/activate
 
 # 3. Initialize cookiecutter structure
 pip install cookiecutter
-cookiecutter -c v1 [https://github.com/drivendata/cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science)
+cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 
 # 4. Rename models directory to model if needed
 # Rename-Item -Path "src\models" -NewName "src\model"
-
 ```
 
 ---
@@ -43,7 +40,6 @@ $env:CAPSTONE_TEST="<YOUR_DAGSHUB_TOKEN>"
 
 # Linux / macOS:
 export CAPSTONE_TEST="<YOUR_DAGSHUB_TOKEN>"
-
 ```
 
 ---
@@ -69,7 +65,6 @@ dvc status
 
 # 6. Push data and model artifacts to S3
 dvc push
-
 ```
 
 ---
@@ -88,22 +83,33 @@ docker build -t capstone-app:latest .
 
 # 3. Test container locally
 docker run -p 5000:5000 -e CAPSTONE_TEST="<YOUR_DAGSHUB_TOKEN>" capstone-app:latest
-
 ```
 
 ---
 
 ## 5. Kubernetes & AWS EKS Deployment
 
+> **Alternative: provision this step with Terraform instead of `eksctl`.**
+> The commands below create the cluster imperatively via the CLI. The
+> `terraform/` directory provisions the same VPC/EKS/ECR/S3 stack
+> declaratively, with `terraform destroy` for clean teardown. See
+> [`terraform/README.md`](../terraform/README.md) for that path. The
+> Kubernetes-level steps further down (Step B onward — applying manifests,
+> checking pods) are the same regardless of which provisioning method you
+> use. One difference worth knowing: the Terraform path attaches
+> `AmazonEC2ContainerRegistryReadOnly` directly to the node group's IAM
+> role, so the manual ECR pull-secret creation in Step B.4 below isn't
+> needed if you provisioned with Terraform.
+
 ### Step A: CLI Tools Setup (Windows PowerShell)
 
 ```powershell
 # 1. Download & move kubectl
-Invoke-WebRequest -Uri "[https://dl.k8s.io/release/v1.28.2/bin/windows/amd64/kubectl.exe](https://dl.k8s.io/release/v1.28.2/bin/windows/amd64/kubectl.exe)" -OutFile "kubectl.exe"
+Invoke-WebRequest -Uri "https://dl.k8s.io/release/v1.28.2/bin/windows/amd64/kubectl.exe" -OutFile "kubectl.exe"
 Move-Item -Path .\kubectl.exe -Destination "C:\Windows\System32"
 
 # 2. Download & move eksctl
-Invoke-WebRequest -Uri "[https://github.com/weaveworks/eksctl/releases/download/v0.158.0/eksctl_Windows_amd64.zip](https://github.com/weaveworks/eksctl/releases/download/v0.158.0/eksctl_Windows_amd64.zip)" -OutFile "eksctl.zip"
+Invoke-WebRequest -Uri "https://github.com/weaveworks/eksctl/releases/download/v0.158.0/eksctl_Windows_amd64.zip" -OutFile "eksctl.zip"
 Expand-Archive -Path .\eksctl.zip -DestinationPath .
 Move-Item -Path .\eksctl.exe -Destination "C:\Windows\System32\eksctl.exe"
 
@@ -111,7 +117,6 @@ Move-Item -Path .\eksctl.exe -Destination "C:\Windows\System32\eksctl.exe"
 aws --version
 kubectl version --client
 eksctl version
-
 ```
 
 ### Step B: Provision Cluster & Apply Manifests
@@ -127,6 +132,7 @@ aws eks --region us-east-1 update-kubeconfig --name flask-app-cluster
 kubectl get nodes
 
 # 4. Create Kubernetes ECR pull secret
+# (not needed if provisioned via Terraform — see callout above)
 $ECR_TOKEN = aws ecr get-login-password --region us-east-1
 kubectl create secret docker-registry ecr-secret `
   --docker-server=<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com `
@@ -142,7 +148,6 @@ kubectl get pods -w
 
 # 7. Get public LoadBalancer external DNS
 kubectl get svc flask-app-service
-
 ```
 
 ---
@@ -155,14 +160,13 @@ ssh -i your-key.pem ubuntu@<PROMETHEUS_EC2_PUBLIC_IP>
 
 # 2. Update system and download binary
 sudo apt update && sudo apt upgrade -y
-wget [https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz](https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz)
+wget https://github.com/prometheus/prometheus/releases/download/v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz
 tar -xvzf prometheus-2.46.0.linux-amd64.tar.gz
 sudo mv prometheus-2.46.0.linux-amd64 /etc/prometheus
 sudo mv /etc/prometheus/prometheus /usr/local/bin/
 
 # 3. Configure scrape target in /etc/prometheus/prometheus.yml
 sudo nano /etc/prometheus/prometheus.yml
-
 ```
 
 ```yaml
@@ -174,13 +178,11 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets: ["<LOAD_BALANCER_EXTERNAL_DNS>:5000"]
-
 ```
 
 ```bash
 # 4. Launch Prometheus
 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
-
 ```
 
 ---
@@ -193,7 +195,7 @@ ssh -i your-key.pem ubuntu@<GRAFANA_EC2_PUBLIC_IP>
 
 # 2. Install and start Grafana
 sudo apt update && sudo apt upgrade -y
-wget [https://dl.grafana.com/oss/release/grafana_13.2.1_amd64.deb](https://dl.grafana.com/oss/release/grafana_13.2.1_amd64.deb)
+wget https://dl.grafana.com/oss/release/grafana_13.2.1_amd64.deb
 sudo apt install ./grafana_13.2.1_amd64.deb -y
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
@@ -201,7 +203,6 @@ sudo systemctl start grafana-server
 
 # 3. Verify service status
 sudo systemctl status grafana-server --no-pager
-
 ```
 
 1. Open `http://<GRAFANA_EC2_PUBLIC_IP>:3000` (Default: `admin` / `admin`).
@@ -225,9 +226,9 @@ eksctl delete cluster --name flask-app-cluster --region us-east-1
 eksctl get cluster --region us-east-1
 
 # 4. Terminate EC2 instances (Prometheus and Grafana) via AWS Console
-
 ```
 
-```
-
-```
+> **If you provisioned with Terraform instead**, use `terraform/destroy.sh`
+> in place of steps 2–4 above — it deletes the Kubernetes-managed
+> LoadBalancer first, then runs `terraform destroy` for the full stack.
+> See [`terraform/README.md`](../terraform/README.md).
