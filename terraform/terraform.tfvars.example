@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and fill in your values.
+# terraform.tfvars is gitignored — never commit it.
+
+allowed_ssh_cidr = "YOUR_IP_HERE/32"  # run: curl ifconfig.me
+alert_email      = "you@example.com"
+
+# Optional overrides:
+# aws_region       = "ap-south-1"
+# cluster_name     = "nlp-sentinel-cluster"
+# node_desired_size = 1
+# key_pair_name    = "your-existing-ec2-keypair"
