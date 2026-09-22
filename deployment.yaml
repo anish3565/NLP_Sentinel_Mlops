@@ -36,9 +36,9 @@ spec:
             secretKeyRef:
               name: capstone-secret
               key: CAPSTONE_TEST
-        envFrom:
-        - secretRef:
-            name: dagshub-credentials
+        # envFrom:
+        # - secretRef:
+        #     name: dagshub-credentials
 
 ---
 apiVersion: v1
