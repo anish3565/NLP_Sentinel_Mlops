@@ -101,8 +101,8 @@ jobs:
       
       - name: Update kubeconfig
         run: |
-          aws eks update-kubeconfig --region us-east-1 --name flask-app-cluster
-
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
+          
       - name: Create Kubernetes Secret
         run: |
           kubectl create secret generic capstone-secret \
