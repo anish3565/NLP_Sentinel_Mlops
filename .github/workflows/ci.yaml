@@ -1,6 +1,13 @@
 name: CI Pipeline
 
-on: push
+on: 
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'projectflow.txt'
 
 jobs:
   project-testing:
