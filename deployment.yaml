@@ -18,8 +18,8 @@ spec:
         - name: ecr-secret
       containers:
       - name: flask-app
-        # image: 056057798606.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest
-        image: 056057798606.dkr.ecr.ap-south-1.amazonaws.com/nlp-sentinel-test-app:latest
+        image: 056057798606.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest
+        # image: 056057798606.dkr.ecr.ap-south-1.amazonaws.com/nlp-sentinel-test-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
