@@ -10,6 +10,10 @@ Production-grade, end-to-end MLOps platform for automated NLP sentiment inferenc
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-844FBA?logo=terraform&logoColor=white)](terraform/README.md)
 [![Observability](https://img.shields.io/badge/Monitoring-Prometheus_%26_Grafana-F46800?logo=prometheus&logoColor=white)](https://prometheus.io/)
 
+### 🎥 [Watch the full walkthrough](https://youtu.be/B0-Jx-8aWn8) — CI/CD, Terraform, live deployment, and monitoring, end to end
+
+[![Watch the demo](https://img.youtube.com/vi/B0-Jx-8aWn8/maxresdefault.jpg)](https://youtu.be/B0-Jx-8aWn8)
+
 ---
 
 ## Execution & Deployment Guide
@@ -131,7 +135,7 @@ terraform apply
 
 ## Quick Workflow Reference
 
-* For full command-by-command instructions across local setup, DVC, AWS EKS, Prometheus, Grafana, and teardown, refer to [`steps.md`](https://github.com/anish3565/NLP_Sentinel_Mlops/blob/main/steps.md).
+* For full command-by-command instructions across local setup, DVC, AWS EKS, Prometheus, Grafana, and teardown, refer to [`steps.md`](steps.md).
 
 ### CI/CD Environment Variables Required
 
