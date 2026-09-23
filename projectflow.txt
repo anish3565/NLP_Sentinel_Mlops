@@ -49,7 +49,7 @@
 31. Add .github/workflows/ci.yaml file
 
 32. Create key token on Dagshub for auth: Go to dagshub repo > Your settings > Tokens > Generate new token
-    >> Please make sure to save token << >> capstone_test: 54b1d67648a9b1267ef906fsdfsd8b292f779f0<<
+    >> Please make sure to save token << >> capstone_test: <REDACTED - see .env, never commit real tokens here> <<
     >> Add this auth token to github secret&var and update on ci file
 
 
@@ -63,7 +63,7 @@
 35. go to root dir and: "docker build -t capstone-app:latest ."
 36. Try running the image: "docker run -p 8888:5000 capstone-app:latest"
     - This run will give 'OSError: capstone_test environment variable is not set'...obviously
-    - alternate: docker run -p 8888:5000 -e CAPSTONE_TEST=54b1d67648a9b1267ef906fsdfsd8b292f779f0 capstone-app:latest
+    - alternate: docker run -p 8888:5000 -e CAPSTONE_TEST=<REDACTED - see .env> capstone-app:latest
     - docker push youruser/capstone-app:latest (optional)
     - optional: try to delete image locally and pull it from dockerhub and run (optional)
 
@@ -82,7 +82,7 @@
 *********Setup required before moving to EKS deployment*********
 ----------------------------------------------------------------------------------
 * Run the following in PowerShell to see the AWS CLI path being used: Get-Command aws
-If the path points to your Anaconda environment (e.g., C:\Users\Personal\anaconda3\...), it’s a conflicting installation.
+If the path points to your Anaconda environment (e.g., C:\Users\Personal\anaconda3\...), it's a conflicting installation.
 
 * Uninstall Python-Based AWS CLI(Remove the conflicting AWS CLI from your Python environment): pip uninstall awscli
 * Verify it's uninstalled: aws --version
@@ -147,11 +147,6 @@ kubectl get svc flask-app-service
 49. Try externa-ip:5000 directly on url or on terminal : curl http://external-ip:5000
 curl http://a6bf6255d5f61470c9782b8955c98271-1409247973.us-east-1.elb.amazonaws.com:5000
 
-
-
-
-
-
 >>>>>>>>>> Prometheus Server Setup <<<<<<<<<<
 
 50. Launch an Ubuntu EC2 Instance for Prometheus: t3.medium,  20GB of disk space (general-purpose SSD), Security Group: Allow inbound access on ports: 9090 for Prometheus Web UI, 22 for SSH access
@@ -182,8 +177,6 @@ scrape_configs:
     static_configs:
       - targets: ["a6bf6255d5f61470c9782b8955c98271-1409247973.us-east-1.elb.amazonaws.com:5000"]  # Replace with your app's External IP
 
-
-
 >> Save the File: ctrl+o -> enter -> ctrl+x
 >> Verify the Changes: cat /etc/prometheus/prometheus.yml
 
@@ -193,8 +186,6 @@ This should return the full path to the prometheus binary, such as /usr/local/bi
 
 57. Run Prometheus with the config file:
 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
-
-
 
 
 >>>>>>>>>> Grafana Server Setup <<<<<<<<<<
@@ -220,9 +211,8 @@ sudo apt update && sudo apt upgrade -y
 
 66. Open Grafana web UI: http://<ec2-public-ip>:3000 (username/pass - admin)
 
-67. Add Prometheus as a Data Source: http://54.81.71.206/:9090
+67. Add Prometheus as a Data Source: http://<prometheus-ec2-public-ip>:9090
     click - Save and Test | Get started with building dashboards.
-
 
 
 ----------------------------------------------------------------------------------
@@ -239,10 +229,7 @@ AWS Resource Cleanup:
 * Confirm service termination on AWS support chat.
 
 
-
-
 ----------------------------------------------------------------------------------
-
 
 ***** How Is CloudFormation Related to EKS? *****
 
@@ -266,15 +253,13 @@ Each stack contains:
 2. Resource dependencies and configurations.
 
 ----------------------------------------------------------------------------------
-
 ----------------------------------------------------------------------------------
 
 Fleet Requests
 Definition: A Fleet Request is an AWS internal process for provisioning EC2 instances. When creating a NodeGroup, EKS uses an Auto Scaling Group (ASG) to request EC2 instances, which count as Fleet Requests.
 
-Why Relevant?: AWS imposes a limit on the number of Fleet Requests per account. If your account exceeds this limit (e.g., due to other active ASGs or EKS clusters), NodeGroup creation fails with the error "You’ve reached your quota for maximum Fleet Requests".
+Why Relevant?: AWS imposes a limit on the number of Fleet Requests per account. If your account exceeds this limit (e.g., due to other active ASGs or EKS clusters), NodeGroup creation fails with the error "You've reached your quota for maximum Fleet Requests".
 ----------------------------------------------------------------------------------
-
 ----------------------------------------------------------------------------------
 
 What is a PVC?
