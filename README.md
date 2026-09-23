@@ -98,8 +98,7 @@ terraform apply
 │   ├── templates/                  # Web interface templates
 │   ├── app.py                      # Flask API serving /predict and /metrics
 │   └── requirements.txt            # Application-specific dependencies
-├── k8s/
-│   └── deployment.yaml             # Kubernetes Deployment and Service manifests
+├── deployment.yaml                 # Kubernetes Deployment and Service manifests
 ├── terraform/
 │   ├── main.tf                     # Provider config and shared locals/tags
 │   ├── variables.tf                # Input variables (region, sizing, etc.)
