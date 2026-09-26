@@ -5,3 +5,6 @@ terraform.tfvars
 *.pem
 .env
 .terraform.tfstate.lock.info
+token.txt
+token.txttype
+*.txttype
